@@ -19,6 +19,17 @@ export default function ChatPage() {
     const [usage, setUsage] = useState({ used: 0, limit: 20 });
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
+    // Cập nhật limit dựa theo gói cước của user
+    useEffect(() => {
+        if (session?.user?.plan) {
+            const plan = session.user.plan;
+            setUsage(prev => ({
+                ...prev,
+                limit: plan === 'enterprise' ? 'Unlimited' : (plan === 'pro' ? 500 : 20)
+            }));
+        }
+    }, [session]);
+
     const messagesEndRef = useRef(null);
     const textareaRef = useRef(null);
 
