@@ -24,19 +24,22 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Gói dịch vụ không hợp lệ' }, { status: 400 });
         }
 
-        // Tạo checkout session
-        const checkoutSession = await stripe.checkout.sessions.create({
-            mode: 'subscription',
-            payment_method_types: ['card'],
-            line_items: [
-                {
-                    price: PLAN_PRICES[planId],
-                    quantity: 1,
-                },
-            ],
-            success_url: `${process.env.NEXTAUTH_URL}/chat?upgrade=success`,
-            cancel_url: `${process.env.NEXTAUTH_URL}/pricing?upgrade=canceled`,
-            client_reference_id: session.user.id,
+            // Lấy URL thực tế đang chạy (localhost hoặc Vercel domain)
+            const appUrl = request.nextUrl?.origin || process.env.NEXTAUTH_URL || 'http://localhost:3000';
+
+            // Tạo checkout session
+            const checkoutSession = await stripe.checkout.sessions.create({
+                mode: 'subscription',
+                payment_method_types: ['card'],
+                line_items: [
+                    {
+                        price: PLAN_PRICES[planId],
+                        quantity: 1,
+                    },
+                ],
+                success_url: `${appUrl}/chat?upgrade=success`,
+                cancel_url: `${appUrl}/pricing?upgrade=canceled`,
+                client_reference_id: session.user.id,
             customer_email: session.user.email,
             metadata: {
                 userId: session.user.id,
