@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -10,8 +10,9 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 
 export default function ChatPage() {
-    const { data: session, status } = useSession();
+    const { data: session, status, update } = useSession();
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const [conversations, setConversations] = useState([]);
     const [activeConversationId, setActiveConversationId] = useState(null);
@@ -29,6 +30,16 @@ export default function ChatPage() {
             }));
         }
     }, [session]);
+
+    // Lắng nghe URL params từ Stripe để tự động cập nhật lại session
+    useEffect(() => {
+        if (searchParams.get('upgrade') === 'success') {
+            // Force xoá query param trên thanh địa chỉ để tránh update liên tục
+            router.replace('/chat');
+            // Cập nhật lại session (NextAuth sẽ gọi lại callback jwt với trigger='update')
+            update();
+        }
+    }, [searchParams, router, update]);
 
     const messagesEndRef = useRef(null);
     const textareaRef = useRef(null);

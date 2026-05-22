@@ -83,10 +83,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             return true;
         },
 
-        async jwt({ token, user }) {
-            if (user) {
+        async jwt({ token, user, trigger }) {
+            if (user || trigger === 'update') {
                 await connectDB();
-                const dbUser = await User.findOne({ email: user.email });
+                const dbUser = await User.findOne({ email: token.email || user?.email });
                 if (dbUser) {
                     token.id = dbUser._id.toString();
                     token.role = dbUser.role;
