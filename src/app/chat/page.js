@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo, Suspense } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import remarkGfm from 'remark-gfm';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 
-export default function ChatPage() {
+function ChatContent() {
     const { data: session, status, update } = useSession();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -530,5 +530,19 @@ export default function ChatPage() {
                 }
             `}</style>
         </div>
+    );
+}
+
+export default function ChatPage() {
+    return (
+        <Suspense fallback={
+            <div className="auth-container">
+                <div className="loading-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        }>
+            <ChatContent />
+        </Suspense>
     );
 }
