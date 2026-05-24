@@ -233,6 +233,19 @@ export default function ChatPage() {
         }
     };
 
+    // Model display helpers
+    const getModelDisplayName = (m) => {
+        if (m === 'gemini') return 'Gemini';
+        if (m === 'gpt') return 'GPT-4o';
+        return 'Claude';
+    };
+
+    const getModelIcon = (m) => {
+        if (m === 'gemini') return '◆';
+        if (m === 'gpt') return '◆';
+        return '◆';
+    };
+
     if (status === 'loading') {
         return (
             <div className="auth-container">
@@ -258,13 +271,13 @@ export default function ChatPage() {
             {/* Sidebar */}
             <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
-                    <div className="sidebar-brand">AI Orchestrator</div>
+                    <div className="sidebar-brand">✦ AI Orchestrator</div>
                     <button
                         className="btn btn-secondary"
                         onClick={newConversation}
                         style={{ width: '100%' }}
                     >
-                        ➕ Cuộc trò chuyện mới
+                        ✦ Cuộc trò chuyện mới
                     </button>
                 </div>
 
@@ -285,14 +298,14 @@ export default function ChatPage() {
                                 className={`conversation-item ${activeConversationId === conv._id ? 'active' : ''}`}
                                 onClick={() => selectConversation(conv)}
                             >
-                                <span style={{ fontSize: '14px' }}>💬</span>
+                                <span style={{ fontSize: '12px', color: 'var(--accent-tertiary)' }}>◇</span>
                                 <span className="conversation-title">{conv.title}</span>
                                 <button
                                     className="conversation-delete"
                                     onClick={(e) => deleteConversation(e, conv._id)}
                                     title="Xóa"
                                 >
-                                    🗑️
+                                    ✕
                                 </button>
                             </div>
                         ))
@@ -310,18 +323,19 @@ export default function ChatPage() {
                             className="btn btn-ghost btn-icon"
                             onClick={() => signOut({ callbackUrl: '/' })}
                             title="Đăng xuất"
+                            style={{ color: 'var(--text-muted)' }}
                         >
-                            🚪
+                            ⏻
                         </button>
                     </div>
                     
                     <div style={{ display: 'flex', gap: '8px' }}>
                         <Link href="/pricing" className="btn btn-secondary" style={{ flex: 1, padding: '8px', fontSize: '12px' }}>
-                            ⭐ Nâng cấp
+                            ✦ Nâng cấp
                         </Link>
                         {session.user?.role === 'admin' && (
                             <Link href="/admin" className="btn btn-secondary" style={{ flex: 1, padding: '8px', fontSize: '12px' }}>
-                                ⚙️ Quản trị
+                                ⚙ Quản trị
                             </Link>
                         )}
                     </div>
@@ -347,6 +361,12 @@ export default function ChatPage() {
                             const isPremium = m === 'gpt' || m === 'claude';
                             const isDisabled = isPremium && userPlan === 'free';
                             
+                            const modelColors = {
+                                gemini: 'var(--color-gemini)',
+                                gpt: 'var(--color-gpt)',
+                                claude: 'var(--color-claude)'
+                            };
+                            
                             return (
                                 <button
                                     key={m}
@@ -362,43 +382,60 @@ export default function ChatPage() {
                                     disabled={isDisabled}
                                     title={isDisabled ? "Yêu cầu gói Pro/Business" : ""}
                                     style={{ 
-                                        opacity: isDisabled ? 0.5 : 1, 
+                                        opacity: isDisabled ? 0.4 : 1, 
                                         cursor: isDisabled ? 'not-allowed' : 'pointer' 
                                     }}
                                 >
-                                    {m === 'gemini' ? '🟦 Gemini' : m === 'gpt' ? '🟩 GPT-4o' + (isDisabled ? ' 🔒' : ' 👑') : '🟧 Claude' + (isDisabled ? ' 🔒' : ' 👑')}
+                                    <span style={{ 
+                                        color: modelName === m ? 'white' : modelColors[m],
+                                        marginRight: '4px',
+                                        fontSize: '10px'
+                                    }}>◆</span>
+                                    {getModelDisplayName(m)}
+                                    {isPremium && (
+                                        <span style={{ marginLeft: '4px', fontSize: '11px' }}>
+                                            {isDisabled ? '🔒' : '✦'}
+                                        </span>
+                                    )}
                                 </button>
                             );
                         })}
                     </div>
 
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-                        {usage.used}/{usage.limit} tin nhắn
+                    <div style={{ 
+                        fontSize: '12px', 
+                        color: 'var(--text-muted)',
+                        fontFamily: 'var(--font-display)',
+                        letterSpacing: '0.5px'
+                    }}>
+                        {usage.used}/{usage.limit}
                     </div>
                 </div>
 
                 {/* Messages / Welcome */}
                 {messages.length === 0 ? (
                     <div className="welcome-screen">
-                        <div className="welcome-title">Xin chào! 👋</div>
+                        <div className="welcome-title">Xin chào! ✦</div>
                         <p className="welcome-subtitle">
-                            Tôi là AI Orchestrator. Hãy bắt đầu cuộc trò chuyện với{' '}
-                            {modelName === 'gemini' ? 'Gemini' : modelName === 'gpt' ? 'GPT-4o' : 'Claude'}.
+                            Tôi là AI Orchestrator — nhạc trưởng của dàn AI. Hãy bắt đầu cuộc trò chuyện với{' '}
+                            <span style={{ color: modelName === 'gemini' ? 'var(--color-gemini)' : modelName === 'gpt' ? 'var(--color-gpt)' : 'var(--color-claude)', fontWeight: 600 }}>
+                                {getModelDisplayName(modelName)}
+                            </span>.
                         </p>
 
                         <div className="welcome-cards">
                             <div className="welcome-card" onClick={() => { setInput('Giải thích machine learning cho người mới bắt đầu'); }}>
-                                <div className="welcome-card-icon">🧠</div>
+                                <div className="welcome-card-icon" style={{ color: 'var(--accent-primary)' }}>◇</div>
                                 <div className="welcome-card-title">Học AI</div>
                                 <div className="welcome-card-desc">Giải thích machine learning cho người mới bắt đầu</div>
                             </div>
                             <div className="welcome-card" onClick={() => { setInput('Viết code JavaScript tạo REST API cơ bản'); }}>
-                                <div className="welcome-card-icon">💻</div>
+                                <div className="welcome-card-icon" style={{ color: 'var(--accent-secondary)' }}>◇</div>
                                 <div className="welcome-card-title">Viết code</div>
                                 <div className="welcome-card-desc">Viết code JavaScript tạo REST API cơ bản</div>
                             </div>
                             <div className="welcome-card" onClick={() => { setInput('Phân tích xu hướng công nghệ 2026'); }}>
-                                <div className="welcome-card-icon">📊</div>
+                                <div className="welcome-card-icon" style={{ color: 'var(--accent-tertiary)' }}>◇</div>
                                 <div className="welcome-card-title">Phân tích</div>
                                 <div className="welcome-card-desc">Phân tích xu hướng công nghệ 2026</div>
                             </div>
@@ -409,13 +446,11 @@ export default function ChatPage() {
                         {messages.map((msg) => (
                             <div key={msg.id} className="message">
                                 <div className={`message-avatar ${msg.role}`}>
-                                    {msg.role === 'user' ? userInitial : '🤖'}
+                                    {msg.role === 'user' ? userInitial : '✦'}
                                 </div>
                                 <div className="message-content">
                                     <div className="message-role">
-                                        {msg.role === 'user' ? session.user?.name : (
-                                            modelName === 'gemini' ? 'Gemini' : modelName === 'gpt' ? 'GPT-4o' : 'Claude'
-                                        )}
+                                        {msg.role === 'user' ? session.user?.name : getModelDisplayName(modelName)}
                                     </div>
                                     <div className="message-text">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -429,10 +464,10 @@ export default function ChatPage() {
                         {/* Typing Indicator */}
                         {chatStatus === 'submitted' && (
                             <div className="message">
-                                <div className="message-avatar assistant">🤖</div>
+                                <div className="message-avatar assistant">✦</div>
                                 <div className="message-content">
                                     <div className="message-role">
-                                        {modelName === 'gemini' ? 'Gemini' : modelName === 'gpt' ? 'GPT-4o' : 'Claude'}
+                                        {getModelDisplayName(modelName)}
                                     </div>
                                     <div className="message-text">
                                         <div className="loading-dots" style={{ margin: '8px 0', justifyContent: 'flex-start' }}>
@@ -445,10 +480,10 @@ export default function ChatPage() {
 
                         {error && (
                             <div className="message">
-                                <div className="message-avatar assistant">🤖</div>
+                                <div className="message-avatar assistant">✦</div>
                                 <div className="message-content">
                                     <div className="message-text" style={{ color: 'var(--error)' }}>
-                                        ⚠️ Lỗi: {error.message === 'Failed to fetch' ? 'Bạn đã hết quota hoặc server bị lỗi. Kiểm tra lại plan!' : error.message}
+                                        ⚠ Lỗi: {error.message === 'Failed to fetch' ? 'Bạn đã hết quota hoặc server bị lỗi. Kiểm tra lại plan!' : error.message}
                                     </div>
                                 </div>
                             </div>
@@ -467,7 +502,7 @@ export default function ChatPage() {
                             value={input}
                             onChange={onTextareaChange}
                             onKeyDown={handleKeyDown}
-                            placeholder={`Nhắn tin cho ${modelName === 'gemini' ? 'Gemini' : modelName === 'gpt' ? 'GPT-4o' : 'Claude'}... (Enter gửi)`}
+                            placeholder={`Nhắn tin cho ${getModelDisplayName(modelName)}... (Enter gửi)`}
                             rows={1}
                             disabled={isLoading}
                         />
@@ -476,11 +511,13 @@ export default function ChatPage() {
                             className="send-btn"
                             disabled={isLoading || !(input || '').trim()}
                         >
-                            {isLoading ? '⏳' : '➤'}
+                            {isLoading ? (
+                                <span style={{ animation: 'spin 1s linear infinite', display: 'inline-block' }}>✦</span>
+                            ) : '➤'}
                         </button>
                     </form>
                     <div className="usage-info">
-                        Đang dùng plan <strong>{session.user?.plan || 'free'}</strong> — {usage.used}/{usage.limit} tin nhắn hôm nay
+                        Plan <strong style={{ color: 'var(--accent-secondary)' }}>{session.user?.plan || 'free'}</strong> — {usage.used}/{usage.limit} tin nhắn hôm nay
                     </div>
                 </div>
             </main>

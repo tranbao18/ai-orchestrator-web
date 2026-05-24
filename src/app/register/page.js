@@ -56,7 +56,7 @@ export default function RegisterPage() {
         <div className="auth-container">
             <div className="auth-card glass">
                 <div className="auth-header">
-                    <div className="auth-logo">AI Orchestrator</div>
+                    <div className="auth-logo">✦ AI Orchestrator</div>
                     <p className="auth-subtitle">Tạo tài khoản miễn phí</p>
                 </div>
 
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                         disabled={loading}
                         style={{ width: '100%', marginTop: '8px' }}
                     >
-                        {loading ? '⏳ Đang tạo...' : '✨ Tạo tài khoản'}
+                        {loading ? '✦ Đang tạo...' : '✦ Tạo tài khoản'}
                     </button>
                 </form>
 

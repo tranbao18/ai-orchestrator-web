@@ -1,48 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ========================== */
-/* === DESIGN SYSTEM       === */
-/* ========================== */
+/* ============================================== */
+/* === NEBULA CONDUCTOR — DESIGN SYSTEM       === */
+/* === Signature Theme for AI Orchestrator     === */
+/* ============================================== */
 
 :root {
-    /* --- Colors --- */
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-tertiary: #1a1a2e;
-    --bg-card: rgba(26, 26, 46, 0.6);
-    --bg-card-hover: rgba(26, 26, 46, 0.9);
-    --bg-input: rgba(255, 255, 255, 0.05);
-    --bg-input-focus: rgba(255, 255, 255, 0.08);
+    /* --- Cosmic Color Palette --- */
+    --bg-primary: #0b0a12;
+    --bg-secondary: #110f1d;
+    --bg-tertiary: #1a1630;
+    --bg-card: rgba(26, 22, 48, 0.55);
+    --bg-card-hover: rgba(35, 28, 65, 0.75);
+    --bg-input: rgba(255, 255, 255, 0.04);
+    --bg-input-focus: rgba(255, 255, 255, 0.07);
 
-    --text-primary: #f0f0f5;
-    --text-secondary: #a0a0b8;
-    --text-muted: #6a6a80;
-    --text-inverse: #0a0a0f;
+    --text-primary: #f2eef8;
+    --text-secondary: #b0a8c8;
+    --text-muted: #6e6490;
+    --text-inverse: #0b0a12;
 
-    --accent-primary: #6c5ce7;
-    --accent-primary-hover: #7c6cf7;
-    --accent-secondary: #00cec9;
-    --accent-gradient: linear-gradient(135deg, #6c5ce7, #a29bfe, #00cec9);
-    --accent-gradient-hover: linear-gradient(135deg, #7c6cf7, #b2abfe, #10ded9);
+    /* --- Nebula Conductor Accents --- */
+    --accent-primary: #e8a0bf;       /* Rose Nebula */
+    --accent-primary-hover: #f0b0cf;
+    --accent-secondary: #f0c674;     /* Star Gold */
+    --accent-tertiary: #9b7ed8;      /* Violet Mist */
+    --accent-gradient: linear-gradient(135deg, #e8a0bf 0%, #f0c674 50%, #9b7ed8 100%);
+    --accent-gradient-hover: linear-gradient(135deg, #f0b0cf 0%, #f5d484 50%, #ab8ee8 100%);
+    --accent-gradient-subtle: linear-gradient(135deg, rgba(232,160,191,0.15), rgba(240,198,116,0.1), rgba(155,126,216,0.15));
 
-    --success: #00b894;
-    --warning: #fdcb6e;
-    --error: #e17055;
-    --info: #74b9ff;
+    --success: #5ee6b8;
+    --warning: #f0c674;
+    --error: #e87070;
+    --info: #7eb8f0;
 
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-color-hover: rgba(255, 255, 255, 0.15);
+    --border-color: rgba(155, 126, 216, 0.1);
+    --border-color-hover: rgba(232, 160, 191, 0.25);
+    --border-glow: rgba(232, 160, 191, 0.4);
 
-    /* --- Gemini/GPT/Claude brand colors --- */
-    --color-gemini: #4285f4;
-    --color-gpt: #10a37f;
-    --color-claude: #d97757;
+    /* --- AI Model Brand Colors (tuned for nebula theme) --- */
+    --color-gemini: #6ea8f4;
+    --color-gpt: #5ec9a0;
+    --color-claude: #e0956a;
 
-    /* --- Shadows --- */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 30px rgba(108, 92, 231, 0.15);
+    /* --- Shadows & Glows --- */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 30px rgba(232, 160, 191, 0.12), 0 0 60px rgba(155, 126, 216, 0.06);
+    --shadow-glow-strong: 0 0 40px rgba(232, 160, 191, 0.2), 0 0 80px rgba(155, 126, 216, 0.1);
+    --shadow-gold: 0 0 20px rgba(240, 198, 116, 0.15);
 
     /* --- Spacing --- */
     --radius-sm: 8px;
@@ -57,12 +64,13 @@
     --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
 
     /* --- Font --- */
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* ========================== */
-/* === RESET & BASE        === */
-/* ========================== */
+/* ============================================== */
+/* === RESET & BASE                           === */
+/* ============================================== */
 
 * {
     margin: 0;
@@ -80,25 +88,63 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* --- Animated Aurora Background --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 15% 80%, rgba(232, 160, 191, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 85% 20%, rgba(155, 126, 216, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(240, 198, 116, 0.03) 0%, transparent 60%);
+    animation: aurora-shift 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
 a {
-    color: var(--accent-secondary);
+    color: var(--accent-primary);
     text-decoration: none;
     transition: color var(--transition-fast);
 }
 a:hover {
-    color: var(--accent-primary);
+    color: var(--accent-secondary);
 }
 
-/* ========================== */
-/* === GLASS MORPHISM      === */
-/* ========================== */
+/* ============================================== */
+/* === GLASS MORPHISM (Nebula Refraction)      === */
+/* ============================================== */
 
 .glass {
     background: var(--bg-card);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
+    position: relative;
+}
+
+.glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        135deg,
+        rgba(232, 160, 191, 0.1),
+        rgba(240, 198, 116, 0.05),
+        rgba(155, 126, 216, 0.1),
+        transparent 60%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 .glass-hover:hover {
@@ -107,9 +153,9 @@ a:hover {
     box-shadow: var(--shadow-glow);
 }
 
-/* ========================== */
-/* === BUTTONS             === */
-/* ========================== */
+/* ============================================== */
+/* === BUTTONS                                === */
+/* ============================================== */
 
 .btn {
     display: inline-flex;
@@ -117,7 +163,7 @@ a:hover {
     justify-content: center;
     gap: 8px;
     padding: 12px 24px;
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: 14px;
     font-weight: 600;
     border: none;
@@ -126,17 +172,19 @@ a:hover {
     transition: all var(--transition-base);
     outline: none;
     white-space: nowrap;
+    letter-spacing: 0.2px;
+    position: relative;
 }
 
 .btn-primary {
     background: var(--accent-gradient);
-    color: white;
-    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    color: var(--text-inverse);
+    box-shadow: 0 4px 20px rgba(232, 160, 191, 0.25), 0 0 40px rgba(155, 126, 216, 0.1);
 }
 .btn-primary:hover {
     background: var(--accent-gradient-hover);
-    box-shadow: 0 6px 25px rgba(108, 92, 231, 0.4);
-    transform: translateY(-1px);
+    box-shadow: 0 6px 30px rgba(232, 160, 191, 0.35), 0 0 60px rgba(155, 126, 216, 0.15);
+    transform: translateY(-2px);
 }
 .btn-primary:active {
     transform: translateY(0);
@@ -150,6 +198,7 @@ a:hover {
 .btn-secondary:hover {
     background: var(--bg-input-focus);
     border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-glow);
 }
 
 .btn-ghost {
@@ -167,7 +216,7 @@ a:hover {
     color: white;
 }
 .btn-danger:hover {
-    background: #c0392b;
+    background: #d05050;
 }
 
 .btn-icon {
@@ -181,9 +230,9 @@ a:hover {
     transform: none !important;
 }
 
-/* ========================== */
-/* === FORM INPUTS         === */
-/* ========================== */
+/* ============================================== */
+/* === FORM INPUTS                            === */
+/* ============================================== */
 
 .input-group {
     display: flex;
@@ -196,6 +245,7 @@ a:hover {
     font-weight: 500;
     color: var(--text-secondary);
     letter-spacing: 0.3px;
+    font-family: var(--font-display);
 }
 
 .input {
@@ -214,16 +264,16 @@ a:hover {
 .input:focus {
     background: var(--bg-input-focus);
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+    box-shadow: 0 0 0 3px rgba(232, 160, 191, 0.12), 0 0 20px rgba(232, 160, 191, 0.06);
 }
 
 .input::placeholder {
     color: var(--text-muted);
 }
 
-/* ========================== */
-/* === AUTH PAGES           === */
-/* ========================== */
+/* ============================================== */
+/* === AUTH PAGES                              === */
+/* ============================================== */
 
 .auth-container {
     min-height: 100vh;
@@ -231,10 +281,40 @@ a:hover {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    position: relative;
+    z-index: 1;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(108, 92, 231, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(0, 206, 201, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(232, 160, 191, 0.07) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(155, 126, 216, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(240, 198, 116, 0.04) 0%, transparent 50%),
         var(--bg-primary);
+}
+
+/* Floating constellation particles */
+.auth-container::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(232, 160, 191, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float 12s ease-in-out infinite;
+}
+
+.auth-container::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    bottom: 15%;
+    right: 10%;
+    background: radial-gradient(circle, rgba(155, 126, 216, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(50px);
+    animation: float 15s ease-in-out infinite reverse;
 }
 
 .auth-card {
@@ -242,6 +322,8 @@ a:hover {
     max-width: 440px;
     padding: 40px;
     animation: fadeSlideUp 0.6s var(--transition-slow);
+    position: relative;
+    z-index: 2;
 }
 
 .auth-header {
@@ -251,12 +333,14 @@ a:hover {
 
 .auth-logo {
     font-size: 28px;
-    font-weight: 800;
+    font-weight: 700;
+    font-family: var(--font-display);
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 8px;
+    letter-spacing: -0.5px;
 }
 
 .auth-subtitle {
@@ -299,7 +383,7 @@ a:hover {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     color: var(--text-primary);
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -314,6 +398,7 @@ a:hover {
     background: var(--bg-input-focus);
     border-color: var(--border-color-hover);
     transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
 }
 
 .auth-footer {
@@ -330,22 +415,24 @@ a:hover {
 
 .auth-error {
     padding: 12px 16px;
-    background: rgba(225, 112, 85, 0.1);
-    border: 1px solid rgba(225, 112, 85, 0.3);
+    background: rgba(232, 112, 112, 0.1);
+    border: 1px solid rgba(232, 112, 112, 0.25);
     border-radius: var(--radius-md);
     color: var(--error);
     font-size: 13px;
     text-align: center;
 }
 
-/* ========================== */
-/* === CHAT LAYOUT         === */
-/* ========================== */
+/* ============================================== */
+/* === CHAT LAYOUT                            === */
+/* ============================================== */
 
 .chat-layout {
     display: flex;
     height: 100vh;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Sidebar --- */
@@ -357,6 +444,19 @@ a:hover {
     display: flex;
     flex-direction: column;
     transition: transform var(--transition-slow);
+    position: relative;
+}
+
+/* Sidebar subtle nebula accent */
+.sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to top, rgba(232, 160, 191, 0.03), transparent);
+    pointer-events: none;
 }
 
 .sidebar-header {
@@ -367,11 +467,16 @@ a:hover {
 .sidebar-brand {
     font-size: 18px;
     font-weight: 700;
+    font-family: var(--font-display);
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 12px;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .sidebar-conversations {
@@ -384,8 +489,11 @@ a:hover {
     width: 4px;
 }
 .sidebar-conversations::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: rgba(155, 126, 216, 0.2);
     border-radius: 4px;
+}
+.sidebar-conversations::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .conversation-item {
@@ -402,14 +510,14 @@ a:hover {
 }
 
 .conversation-item:hover {
-    background: var(--bg-input);
+    background: rgba(155, 126, 216, 0.08);
     color: var(--text-primary);
 }
 
 .conversation-item.active {
-    background: var(--bg-tertiary);
+    background: rgba(232, 160, 191, 0.08);
     color: var(--text-primary);
-    border-color: var(--border-color-hover);
+    border-color: rgba(232, 160, 191, 0.15);
 }
 
 .conversation-title {
@@ -445,6 +553,8 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 10px;
+    position: relative;
+    z-index: 2;
 }
 
 .user-avatar {
@@ -457,8 +567,9 @@ a:hover {
     justify-content: center;
     font-size: 14px;
     font-weight: 700;
-    color: white;
+    color: var(--text-inverse);
     flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(232, 160, 191, 0.2);
 }
 
 .user-info {
@@ -477,9 +588,10 @@ a:hover {
 
 .user-plan {
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--accent-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    font-weight: 600;
 }
 
 /* --- Chat Main --- */
@@ -488,6 +600,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    position: relative;
 }
 
 .chat-header {
@@ -496,32 +609,37 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--bg-secondary);
+    background: rgba(17, 15, 29, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .model-selector {
     display: flex;
-    gap: 6px;
-    background: var(--bg-input);
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.03);
     padding: 4px;
     border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
 }
 
 .model-btn {
     padding: 8px 16px;
     border: none;
     border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all var(--transition-base);
     background: transparent;
     color: var(--text-muted);
+    position: relative;
 }
 
 .model-btn:hover {
     color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .model-btn.active {
@@ -529,13 +647,38 @@ a:hover {
     box-shadow: var(--shadow-sm);
 }
 
+/* Conductor wand glow on active model */
+.model-btn.active::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    opacity: 0.3;
+    filter: blur(6px);
+    z-index: -1;
+}
+
 .model-btn.active[data-model="gemini"] {
     background: var(--color-gemini);
+    box-shadow: 0 0 20px rgba(110, 168, 244, 0.3);
 }
+.model-btn.active[data-model="gemini"]::after {
+    background: var(--color-gemini);
+}
+
 .model-btn.active[data-model="gpt"] {
     background: var(--color-gpt);
+    box-shadow: 0 0 20px rgba(94, 201, 160, 0.3);
 }
+.model-btn.active[data-model="gpt"]::after {
+    background: var(--color-gpt);
+}
+
 .model-btn.active[data-model="claude"] {
+    background: var(--color-claude);
+    box-shadow: 0 0 20px rgba(224, 149, 106, 0.3);
+}
+.model-btn.active[data-model="claude"]::after {
     background: var(--color-claude);
 }
 
@@ -551,11 +694,14 @@ a:hover {
 }
 
 .messages-container::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 .messages-container::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: rgba(155, 126, 216, 0.2);
     border-radius: 6px;
+}
+.messages-container::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .message {
@@ -564,7 +710,7 @@ a:hover {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.4s ease;
 }
 
 .message-avatar {
@@ -581,12 +727,14 @@ a:hover {
 
 .message-avatar.user {
     background: var(--accent-gradient);
-    color: white;
+    color: var(--text-inverse);
+    box-shadow: 0 0 12px rgba(232, 160, 191, 0.15);
 }
 
 .message-avatar.assistant {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: linear-gradient(135deg, rgba(155, 126, 216, 0.2), rgba(232, 160, 191, 0.1));
+    border: 1px solid rgba(155, 126, 216, 0.2);
+    color: var(--accent-tertiary);
 }
 
 .message-content {
@@ -599,6 +747,7 @@ a:hover {
     font-weight: 600;
     margin-bottom: 4px;
     color: var(--text-primary);
+    font-family: var(--font-display);
 }
 
 .message-text {
@@ -617,7 +766,7 @@ a:hover {
 }
 
 .message-text pre {
-    background: var(--bg-primary);
+    background: rgba(11, 10, 18, 0.8);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     padding: 12px 16px;
@@ -627,15 +776,17 @@ a:hover {
 }
 
 .message-text code {
-    background: var(--bg-input);
+    background: rgba(155, 126, 216, 0.1);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
+    color: var(--accent-primary);
 }
 
 .message-text pre code {
     background: none;
     padding: 0;
+    color: var(--text-secondary);
 }
 
 .message-text ul, .message-text ol {
@@ -654,8 +805,9 @@ a:hover {
 /* --- Chat Input --- */
 .chat-input-container {
     padding: 16px 24px 24px;
-    background: var(--bg-secondary);
+    background: linear-gradient(to top, var(--bg-secondary), rgba(17, 15, 29, 0.95));
     border-top: 1px solid var(--border-color);
+    position: relative;
 }
 
 .chat-input-wrapper {
@@ -685,7 +837,7 @@ a:hover {
 
 .chat-textarea:focus {
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    box-shadow: 0 0 0 3px rgba(232, 160, 191, 0.08), 0 0 30px rgba(232, 160, 191, 0.06);
     background: var(--bg-input-focus);
 }
 
@@ -699,7 +851,7 @@ a:hover {
     border-radius: var(--radius-md);
     background: var(--accent-gradient);
     border: none;
-    color: white;
+    color: var(--text-inverse);
     font-size: 18px;
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -707,15 +859,16 @@ a:hover {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(232, 160, 191, 0.15);
 }
 
 .send-btn:hover:not(:disabled) {
-    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.4);
-    transform: translateY(-1px);
+    box-shadow: 0 4px 30px rgba(232, 160, 191, 0.3), 0 0 50px rgba(155, 126, 216, 0.15);
+    transform: translateY(-2px);
 }
 
 .send-btn:disabled {
-    opacity: 0.4;
+    opacity: 0.3;
     cursor: not-allowed;
 }
 
@@ -735,16 +888,34 @@ a:hover {
     justify-content: center;
     padding: 40px;
     text-align: center;
+    position: relative;
+}
+
+/* Nebula ambiance behind welcome */
+.welcome-screen::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(232, 160, 191, 0.06) 0%, rgba(155, 126, 216, 0.04) 40%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: pulse-glow 8s ease-in-out infinite;
 }
 
 .welcome-title {
-    font-size: 32px;
-    font-weight: 800;
+    font-size: 36px;
+    font-weight: 700;
+    font-family: var(--font-display);
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    animation: shimmer 3s ease-in-out infinite;
+    background-size: 200% 100%;
 }
 
 .welcome-subtitle {
@@ -752,6 +923,8 @@ a:hover {
     font-size: 16px;
     margin-bottom: 40px;
     max-width: 500px;
+    position: relative;
+    z-index: 1;
 }
 
 .welcome-cards {
@@ -760,6 +933,8 @@ a:hover {
     gap: 16px;
     max-width: 700px;
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .welcome-card {
@@ -770,12 +945,30 @@ a:hover {
     text-align: left;
     transition: all var(--transition-base);
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-base);
 }
 
 .welcome-card:hover {
     border-color: var(--border-color-hover);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-glow);
+}
+
+.welcome-card:hover::before {
+    opacity: 1;
 }
 
 .welcome-card-icon {
@@ -786,6 +979,7 @@ a:hover {
 .welcome-card-title {
     font-size: 14px;
     font-weight: 600;
+    font-family: var(--font-display);
     color: var(--text-primary);
     margin-bottom: 4px;
 }
@@ -807,21 +1001,23 @@ a:hover {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--text-muted);
+    background: var(--accent-primary);
     animation: bounce 1.4s infinite both;
 }
 
 .loading-dots span:nth-child(2) {
     animation-delay: 0.16s;
+    background: var(--accent-secondary);
 }
 
 .loading-dots span:nth-child(3) {
     animation-delay: 0.32s;
+    background: var(--accent-tertiary);
 }
 
-/* ========================== */
-/* === ANIMATIONS          === */
-/* ========================== */
+/* ============================================== */
+/* === ANIMATIONS                             === */
+/* ============================================== */
 
 @keyframes fadeSlideUp {
     from {
@@ -835,8 +1031,8 @@ a:hover {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes bounce {
@@ -855,9 +1051,230 @@ a:hover {
     to { transform: rotate(360deg); }
 }
 
-/* ========================== */
-/* === RESPONSIVE          === */
-/* ========================== */
+/* --- Nebula Conductor Signature Animations --- */
+
+@keyframes aurora-shift {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-30px, 20px) scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(20px, -10px) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(15px, -20px);
+    }
+    50% {
+        transform: translate(-10px, 15px);
+    }
+    75% {
+        transform: translate(20px, 10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes gradient-border-spin {
+    0% {
+        --angle: 0deg;
+    }
+    100% {
+        --angle: 360deg;
+    }
+}
+
+/* ============================================== */
+/* === PRICING PAGE                           === */
+/* ============================================== */
+
+.pricing-container {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.pricing-title {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+.pricing-subtitle {
+    color: var(--text-secondary);
+    font-size: 18px;
+    margin-bottom: 56px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.pricing-card {
+    padding: 36px;
+    border-radius: var(--radius-xl);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow-strong);
+}
+
+.pricing-card.featured {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--bg-card), var(--bg-card)),
+                      var(--accent-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.pricing-card.featured::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--accent-gradient);
+    z-index: -1;
+    filter: blur(15px);
+    opacity: 0.2;
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -14px;
+    right: 24px;
+    background: var(--accent-gradient);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--text-inverse);
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(232, 160, 191, 0.3);
+}
+
+.pricing-plan-name {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.pricing-price {
+    font-size: 36px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    margin-bottom: 28px;
+}
+
+.pricing-price span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+    flex: 1;
+}
+
+.pricing-features li {
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pricing-features li .check {
+    color: var(--success);
+    font-size: 16px;
+}
+
+.pricing-features li .cross {
+    color: var(--text-muted);
+    font-size: 16px;
+    opacity: 0.5;
+}
+
+/* ============================================== */
+/* === CUSTOM SCROLLBAR (Global)              === */
+/* ============================================== */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(155, 126, 216, 0.15);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(155, 126, 216, 0.3);
+}
+
+/* ============================================== */
+/* === RESPONSIVE                             === */
+/* ============================================== */
 
 @media (max-width: 768px) {
     .sidebar {
@@ -877,7 +1294,8 @@ a:hover {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(11, 10, 18, 0.7);
+        backdrop-filter: blur(4px);
         z-index: 99;
     }
 
@@ -899,5 +1317,29 @@ a:hover {
 
     .messages-container {
         padding: 16px;
+    }
+
+    .welcome-title {
+        font-size: 28px;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .model-selector {
+        gap: 2px;
+        padding: 3px;
+    }
+
+    .model-btn {
+        padding: 6px 10px;
+        font-size: 12px;
     }
 }

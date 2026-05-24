@@ -45,7 +45,7 @@ export default function LoginPage() {
         <div className="auth-container">
             <div className="auth-card glass">
                 <div className="auth-header">
-                    <div className="auth-logo">AI Orchestrator</div>
+                    <div className="auth-logo">✦ AI Orchestrator</div>
                     <p className="auth-subtitle">Đăng nhập để tiếp tục</p>
                 </div>
 
@@ -84,7 +84,7 @@ export default function LoginPage() {
                         disabled={loading}
                         style={{ width: '100%', marginTop: '8px' }}
                     >
-                        {loading ? '⏳ Đang đăng nhập...' : '🔐 Đăng nhập'}
+                        {loading ? '✦ Đang đăng nhập...' : '✦ Đăng nhập'}
                     </button>
                 </form>
 
